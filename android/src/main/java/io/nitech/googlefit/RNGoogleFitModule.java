@@ -16,7 +16,9 @@ import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.fitness.Fitness;
 import com.google.android.gms.fitness.FitnessOptions;
+import com.google.android.gms.fitness.data.DataSource;
 import com.google.android.gms.fitness.data.DataType;
+import com.google.android.gms.fitness.request.SessionInsertRequest;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -72,6 +74,8 @@ public class RNGoogleFitModule extends ReactContextBaseJavaModule  {
     }
 
     Context context = activity.getApplicationContext();
+
+    new DataSource.Builder().build().getAppPackageName();
 
     try {
        Fitness.getConfigClient(activity, GoogleSignIn.getLastSignedInAccount(context)).disableFit()

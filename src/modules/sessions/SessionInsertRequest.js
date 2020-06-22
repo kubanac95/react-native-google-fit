@@ -1,11 +1,12 @@
 // https://developers.google.com/android/reference/com/google/android/gms/fitness/request/SessionInsertRequest
 
-import Session from "./session";
+import Session from "./Session";
+import DataSet from "./DataSet";
 
 export default class SessionInsertRequest {
-  constructor(nativeSession) {
-    this.session = nativeSession.session;
-    this.dataPoint;
+  constructor(request) {
+    this.session = request.session;
+    this.dataSets = request.dataSets;
   }
 
   setSession(session) {
@@ -22,12 +23,22 @@ export default class SessionInsertRequest {
     return this;
   }
 
-  addDataSet() {
+  addDataSet(dataSet) {
+    if (!dataSet instanceof DataSet) {
+      return Promise.reject(
+        new Error(
+          `SessionInsertRequest:addDataSet expects a 'DataSet' but got type ${typeof dataSet}`
+        )
+      );
+    }
+
+    this.dataSets.push(dataSet);
+
     return this;
   }
 
-  addAggregatedDataPoint() {
-    return this;
+  getDataSets() {
+    return this.dataSets;
   }
 
   build() {

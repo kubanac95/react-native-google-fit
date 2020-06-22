@@ -1,6 +1,6 @@
 // https://developers.google.com/android/reference/com/google/android/gms/fitness/data/Session
 
-import { FitnessTypes } from "./types";
+import { FitnessType } from "./types";
 
 export default class Session {
   constructor(nativeSession) {
@@ -74,7 +74,7 @@ export default class Session {
   }
 
   setActivity(activity = null) {
-    if (!FitnessTypes[activity]) {
+    if (!FitnessType[activity]) {
       throw new Error("Session:setActivity expects invalid type");
     }
 
@@ -92,7 +92,7 @@ export default class Session {
       throw new Error("Session: Missing required `startTime` property");
     }
 
-    if (!FitnessTypes[this.activity]) {
+    if (!FitnessType[this.activity]) {
       throw new Error("Session: Missing or unsupported `activity`");
     }
   }
